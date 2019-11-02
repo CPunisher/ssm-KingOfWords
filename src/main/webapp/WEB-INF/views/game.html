@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>King of Words - 游戏</title>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/game.js" ></script>
+    <style>
+        .div_block {
+            float: left;
+            width: 32%;
+            border: thin black solid;
+            margin-left: 5px;
+        }
+
+        .optional {
+            color: white;
+            background-color: chocolate;
+        }
+
+        .optional:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div style="text-align: center;">
+    <button id="start" onclick="start()">开始</button>
+    <a href="/kow/lobby"><button>退出房间</button></a>
+</div>
+
+<div class="div_block">
+    <p style="text-align: center">消息:<button id="clearMessage" onclick="clearMessage()">清除</button></p>
+    <div id="message"></div>
+</div>
+
+<div id="div_word" class="div_block" style="text-align: center">
+    <div id="div_word_caption">
+        <p style="text-align: right;width: 24%; float: left;">得分:</p>
+        <p id="score" style="text-align: left; width: 24%; float: left;"></p>
+        <p style="text-align: right;width: 24%; float: left;">时间:</p>
+        <p id="time" style="text-align: left; width: 24%; float: left;"></p>
+    </div>
+    <div>
+        <p id="word"></p>
+        <p id="option0" class="optional" onclick="answer(0)"></p>
+        <p id="option1" class="optional" onclick="answer(1)"></p>
+        <p id="option2" class="optional" onclick="answer(2)"></p>
+        <p id="option3" class="optional" onclick="answer(3)"></p>
+    </div>
+</div>
+
+<div class="div_block">
+    <p style="text-align: center">得分表:</p>
+    <div id="div_score_table">
+
+    </div>
+</div>
+
+<input id="roomIdHidden" type="hidden" th:value="${roomId}">
+</body>
+</html>

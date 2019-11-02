@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cpunisher.dao.UserDataDao">
+    <select id="exists" resultType="com.cpunisher.model.Word">
+        SELECT
+            w. *
+        FROM
+            words w
+        INNER JOIN
+            mistakes m
+        ON
+            m.wordId = w.id
+        WHERE
+            m.userId = #{userId}
+        AND
+            m.wordId = #{wordId}
+    </select>
+
+    <insert id="addMistake">
+        INSERT INTO
+            mistakes(userId, wordId)
+        VALUES (#{userId}, #{wordId})
+    </insert>
+
+    <delete id="removeMistake">
+        DELETE FROM
+            mistakes
+        WHERE
+            userId = #{userId}
+        AND
+            wordId = #{wordId}
+    </delete>
+
+    <select id="listMistakes" resultType="com.cpunisher.model.Word">
+        SELECT
+            w. *
+        FROM
+            words w
+        INNER JOIN
+            mistakes m
+        ON
+            m.wordId = w.id
+        WHERE
+            m.userId = #{userId}
+    </select>
+</mapper>

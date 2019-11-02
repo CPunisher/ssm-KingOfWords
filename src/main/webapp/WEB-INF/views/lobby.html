@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>King of Words - 大厅</title>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <style>
+        .main_div {
+            text-align: center;
+        }
+
+        .main_div > div {
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function join(roomId) {
+            sessionStorage.setItem("roomId", roomId);
+            window.location.href = "game";
+        }
+    </script>
+</head>
+
+<body>
+
+<div class="main_div">
+    <div>
+        <span th:text="'欢迎, ' + ${session.user.getNickname()}"></span>
+        <a href="/kow/logout">退出登录</a>
+    </div>
+    <div>
+        <a href="/kow/createRoom">
+            <button id="createRoom">创建房间</button>
+        </a>
+        <a href="/kow/lobby">
+            <button id="refresh">刷新</button>
+        </a>
+        <a href="/kow/mistakes">
+            <button>查看错题</button>
+        </a>
+    </div>
+    <div>
+        <table style="margin: 0 auto; width: 40%">
+            <tr>
+                <th>房间ID</th>
+                <th>房间人数</th>
+                <th>房间状态</th>
+                <th></th>
+            </tr>
+            <tr th:each="room:${rooms}">
+                <td th:text="${room.roomId}"></td>
+                <td th:text="${room.playerCount}"></td>
+                <td th:text="${room.isStarted ? '游戏中' : '未开始'}"></td>
+                <td>
+                    <button th:onclick="join([[${room.roomId}]]);">加入</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

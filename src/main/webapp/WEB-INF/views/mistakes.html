@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>King of Words - 错题列表</title>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script>
+        function remove(id) {
+            $.ajax({
+                type: 'POST',
+                url: '/kow/removeMistake',
+                data: {
+                    wordId: id
+                },
+                success: function () {
+                    alert("删除成功!");
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div style="text-align: center">
+        <a href="/kow/lobby"><button>返回大厅</button></a>
+    </div>
+    <div>
+        <table style="margin: 0 auto; width: 40%; border: black thin solid">
+            <tr th:each="mistake:${mistakes}">
+                <td th:text="${mistake.word}"></td>
+                <td th:text="${mistake.meaning1}"></td>
+                <td>
+                    <button th:onclick="remove([[${mistake.id}]]);">删除</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
