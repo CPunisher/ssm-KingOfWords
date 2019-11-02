@@ -1,4 +1,4 @@
-#### ssm-KingOfWords
+# ssm-KingOfWords
 
 ---
 
@@ -32,7 +32,7 @@
 
 下面是不完整的项目教程(代码较多，不会全部贴出)，不过已经体现出了主要的实现思路了:
 
-#### 1. 使用IntelliJ IDEA创建Web项目
+## 1. 使用IntelliJ IDEA创建Web项目
 
 ---
 
@@ -42,7 +42,7 @@ Create New Project -> 选择Maven-> 勾选Create from archetype -> 下方选择m
 
 附上Apache Maven官网: [Maven]( http://maven.apache.org/ )
 
-#### 2. 修改pom.xml导入项目需要的包
+## 2. 修改pom.xml导入项目需要的包
 
 ---
 
@@ -277,7 +277,7 @@ pom.xml
 
 之后Maven就会下载dependencies并且自动导入
 
-#### 3.  创建数据表并读取词库
+## 3.  创建数据表并读取词库
 
 ---
 
@@ -334,7 +334,7 @@ CREATE TABLE mistakes
   DEFAULT CHAR SET = utf8 COMMENT ='错题表';
 ```
 
-#### 4. 创建数据库对象Model
+## 4. 创建数据库对象Model
 
 通常一张数据表就对应一个Model
 
@@ -472,7 +472,7 @@ public class Word {
 }
 ```
 
-#### 5. 创建操作数据库的持久层DAO
+## 5. 创建操作数据库的持久层DAO
 
 ---
 
@@ -537,13 +537,13 @@ public interface UserDataDao {
 }
 ```
 
-#### 6. 创建对应的Service和ServiceImpl
+## 6. 创建对应的Service和ServiceImpl
 
 ---
 
 这个部分代码比较简单，所以就不贴了
 
-#### 7.  整合Spring和MyBatis
+## 7.  整合Spring和MyBatis
 
 ---
 
@@ -732,7 +732,7 @@ user-data-mapper.xml
 </mapper>
 ```
 
-#### 8.  添加Spring MVC配置文件
+## 8.  添加Spring MVC配置文件
 
 ---
 
@@ -779,6 +779,37 @@ spring-mvc.xml
 </beans>
 ```
 
+别忘了在web.xml里注册Listener和Dispatcher
+
+```xml
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <servlet>
+    <servlet-name>spring-dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring-mvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>spring-dispatcher</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+</web-app>
+```
+
 
 
 到此为止，SSM的框架搭完了。
@@ -793,7 +824,7 @@ Controller类的实现比较常规，翻阅一下controller包下的代码应该
 
 然后通过收发json数据来交互
 
-#### 9. 创建Websocket
+## 9. 创建Websocket
 
 ---
 
@@ -909,7 +940,7 @@ public class SocketServerConfig {
 }
 ```
 
-#### 10. 处理游戏进程
+## 10. 处理游戏进程
 
 ---
 
@@ -954,7 +985,7 @@ public interface RoomService {
 
 以上就是后端主要实现思路和部分代码
 
-#### 11. 前端脚本
+## 11. 前端脚本
 
 前端页面比较简单，主要是和后端交互的js的编写。各条消息基本和后端RoomService的处理一一对应。
 
