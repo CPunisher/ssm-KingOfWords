@@ -21,6 +21,7 @@
 <body>
 <form method="post" action="/kow/register">
     <table>
+        <!--/*@thymesVar id="message" type="java.lang.String"*/-->
         <span th:text="${message}"></span>
         <tr>
             <td>
@@ -55,7 +56,8 @@
             </td>
         </tr>
     </table>
-    <input type="submit" id="login" name="login" value="注册">
+    <input type="submit" id="register" name="register" value="注册">
+    <a href="/kow/loginForm"><button>返回</button></a>
 </form>
 </body>
 </html>

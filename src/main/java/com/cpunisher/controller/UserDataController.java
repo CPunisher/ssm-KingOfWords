@@ -5,9 +5,7 @@ import com.cpunisher.model.Word;
 import com.cpunisher.service.UserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -18,14 +16,14 @@ public class UserDataController {
     @Autowired
     private UserDataService userDataService;
 
-    @RequestMapping("/mistakes")
+    @GetMapping("/mistakes")
     public ModelAndView mistakes(ModelAndView mv ,HttpSession session) {
         mv.addObject("mistakes", loadMistakes(session));
         mv.setViewName("mistakes");
         return mv;
     }
 
-    @RequestMapping("/removeMistake")
+    @PostMapping("/removeMistake")
     public ModelAndView removeMistake(@RequestParam("wordId") int wordId, ModelAndView mv, HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user != null) {
@@ -46,7 +44,7 @@ public class UserDataController {
         return null;
     }
 
-    @RequestMapping("/saveMistakes")
+    @PostMapping("/saveMistakes")
     @ResponseBody
     public void saveMistakes(@RequestParam("mistakes") int[] mistakes, HttpSession session) {
         User user = (User) session.getAttribute("user");

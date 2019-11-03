@@ -1,10 +1,18 @@
 package com.cpunisher.model;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotBlank;
+
 public class User {
 
     private int id;
+    @NotBlank(message = "ID不能为空")
     private String openId;
+    @NotBlank(message = "密码不能为空")
+    @Length(min = 6, max = 15, message = "密码长度必须是6-15位")
     private String password;
+    @NotBlank(message = "昵称不能为空")
     private String nickname;
     private String iconUrl;
 
